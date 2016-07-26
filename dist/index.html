@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>UBC Library</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="img/book-icon.png" rel="icon" type="image/png">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="js/jquery-1.12.3.js"></script>
+    <script src="js/script.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+
+  <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span> 
+          </button>
+          <a class="navbar-brand" href="#myPage">UBC Library</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#acervoCompleto">COMPLETE COLLECTION</a></li>
+            <li><a href="#buscaColecao">SEARCH BY COLLECTION</a></li>
+            <li><a href="https://www.ubc.ca/" target="_blank">UBC UNIVERSITY</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="jumbotron text-center">
+      <h1><img src="img/icon.png" width="10%"> UBC Library</h1> 
+      <p>A complete collection of books, images , maps and more</p> 
+    </div>
+    <!--                   Acervo Completo             -->
+    <div class="container-fluid" id="acervoCompleto">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2>COMPLETE COLLECTION</h2>
+          <h4>Check out some of the collections available in our library</h4>      
+          <div id="tabelasAcervo"></div>
+          <div class="paginacaoTabela"></div>
+        </div>
+        <div class="col-sm-4">
+          <span class="glyphicon glyphicon-globe logo slideanim"></span>
+        </div>
+      </div>
+    </div>
+    <!--                   Busca por coleção             -->
+    <div class="container-fluid bg-grey" id="buscaColecao">
+      <div class="row">
+        <div class="col-sm-4">
+          <span class="glyphicon glyphicon-signal logo slideanim"></span>
+          <div id="imagem"></div>
+        </div>
+        <div class="col-sm-8">
+          <h2>SEARCH BY COLLECTION</h2>
+          <h4>Enter the code of a collection for more details</h4>
+          <form class="form-inline" role="form" autocomplete="off">
+            <div class="form-group">
+              <label for="search">Collection Code:</label>
+              <input type="search" class="form-control" id="campoPesquisa" placeholder="ex: darwin">
+            </div>
+            <button type="button" class="btn btn-default" id="pesquisar">
+              <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+            <div class="form-group">
+              <select class="form-control" id="selecaoItem"></select>
+            </div>
+          </form>
+          <div id="tabelaInformacoes"></div>
+          <button type="button" class="btn btn-default" id="limpar">
+            Clean <span class="glyphicon glyphicon-signal"></span> 
+          </button>
+        </div>
+      </div>
+    </div>
+
+        <!--                   Contato                          -->
+    <div class="container-fluid" id="contato">
+      <h2 class="text-center">CONTATO</h2>
+      <div class="row">
+        <div class="col-sm-5">
+          <p>Entre em contato conosco.</p>
+          <p><span class="glyphicon glyphicon-map-marker"></span> Vancouver, BC Canada V6T 1Z1</p>
+          <p><span class="glyphicon glyphicon-phone"></span> 604-822-6375</p>
+          <p><span class="glyphicon glyphicon-envelope"></span> contato@ubclibrary.com.br</p>
+        </div>
+        <div class="col-sm-7">
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="name" name="name" placeholder="Nome" type="text" required>
+            </div>
+            <div class="col-sm-6 form-group">
+              <input class="form-control" id="email" name="email" placeholder="E-mail" type="email" required>
+            </div>
+          </div>
+          <textarea class="form-control" id="comments" name="comments" placeholder="Comentário" rows="5"></textarea><br>
+          <div class="row">
+            <div class="col-sm-12 form-group">
+              <button class="btn btn-default pull-right" type="submit">Enviar</button>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+    <div id="googleMap"></div>
+    
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script>
+      var myCenter = new google.maps.LatLng(49.2606087,-123.2481826,17);
+      function initialize() {
+        var mapProp = {
+          center:myCenter,
+          zoom:12,
+          scrollwheel:false,
+          draggable:false,
+          mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        var marker = new google.maps.Marker({position:myCenter,});
+        marker.setMap(map);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    <div class="modal fade" id="modalAttention" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h3>ATTENTION</h3>
+            <p>Invalid code. Enter an existing option.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modalWelcome" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h3>WELCOME TO UBC LIBRARY</h3>
+            <p>A complete collection of books, images , maps and more</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="foto"></div>
+    <footer class="container-fluid text-center">
+      <a href="#myPage" title="To Top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+      <p>Bootstrap Theme Made By <a href="http://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p> 
+    </footer>
+  </body>
+</html>
